@@ -33,6 +33,8 @@ func main() {
 		logrus.Fatalf("error connecting to database: %s", err.Error())
 	}
 
+	repo := repository.NewRepositrory(db)
+
 	srv := new(Server)
 	if err := srv.Run(viper.GetString("port"), nil); err != nil {
 		logger.Fatalf("error running http server: %s", err.Error())

@@ -3,6 +3,6 @@ package repository
 type Repository struct {
 }
 
-func NewRepositrory(db PostgresDB) *Repository {
+func NewRepositrory(db *PostgresDB) *Repository {
 	return &Repository{}
 }
