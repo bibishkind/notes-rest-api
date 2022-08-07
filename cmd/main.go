@@ -2,8 +2,11 @@ package main
 
 import (
 	. "github.com/bibishkin/bi-notes-rest-api"
+	"github.com/bibishkin/bi-notes-rest-api/pkg/repository"
+	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+	"os"
 )
 
 func main() {
@@ -12,12 +15,27 @@ func main() {
 	logger.SetReportCaller(true)
 
 	if err := initConfig(); err != nil {
-		logrus.Fatalf("error intializing configs: %s", err.Error())
+		logrus.Fatalf("error intializing config: %s", err.Error())
+	}
+
+	if err := godotenv.Load(); err != nil {
+		logrus.Fatalf("error loading env variables: %s", err.Error())
+	}
+
+	db, err := repository.NewPostgresDB(repository.Config{
+		Host:     viper.GetString("db.host"),
+		Port:     viper.GetString("db.port"),
+		Username: viper.GetString("db.username"),
+		Password: os.Getenv("DB_PASSWORD"),
+		DBName:   viper.GetString("db.name"),
+	})
+	if err != nil {
+		logrus.Fatalf("error connecting to database: %s", err.Error())
 	}
 
 	srv := new(Server)
 	if err := srv.Run(viper.GetString("port"), nil); err != nil {
-		logger.Fatalf("error occured whlie running a http server: %s", err.Error())
+		logger.Fatalf("error running http server: %s", err.Error())
 	}
 }
 
