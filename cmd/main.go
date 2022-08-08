@@ -2,7 +2,9 @@ package main
 
 import (
 	notes "github.com/bibishkin/bi-notes-rest-api"
+	"github.com/bibishkin/bi-notes-rest-api/pkg/handler"
 	"github.com/bibishkin/bi-notes-rest-api/pkg/repository"
+	"github.com/bibishkin/bi-notes-rest-api/pkg/service"
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
@@ -33,10 +35,12 @@ func main() {
 		logrus.Fatalf("error connecting to database: %s", err.Error())
 	}
 
-	repo := repository.NewRepository(db)
+	r := repository.NewRepository(db)
+	s := service.NewService(r)
+	h := handler.NewHandler(s)
 
 	srv := new(notes.Server)
-	if err := srv.Run(viper.GetString("port"), nil); err != nil {
+	if err := srv.Run(viper.GetString("port"), h.GetRoutes()); err != nil {
 		logger.Fatalf("error running http server: %s", err.Error())
 	}
 }
