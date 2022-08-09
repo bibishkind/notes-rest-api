@@ -8,6 +8,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+	"net/http"
 	"os"
 )
 
@@ -41,7 +42,12 @@ func main() {
 
 	repository := postgres.NewRepository(postgresPool)
 	service := service2.NewService(repository)
-	_ = handler2.NewHandler(service)
+	handler := handler2.NewHandler(service)
+
+	if err := http.ListenAndServe(":"+viper.GetString("port"), handler.GetRouter()); err != nil {
+		logger.Fatalf("error running server: %s", err.Error())
+	}
+
 }
 
 func initConfig() error {
