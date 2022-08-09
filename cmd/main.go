@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"github.com/bibishkin/bi-notes-rest-api/pkg/repository/postgres"
+	service2 "github.com/bibishkin/bi-notes-rest-api/pkg/service"
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
@@ -37,7 +38,8 @@ func main() {
 	}
 	logger.Infof("database connection successfully made")
 
-	_ = postgres.NewRepository(postgresPool)
+	repository := postgres.NewRepository(postgresPool)
+	_ = service2.NewService(repository)
 }
 
 func initConfig() error {
