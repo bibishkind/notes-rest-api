@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	handler2 "github.com/bibishkin/bi-notes-rest-api/pkg/handler"
 	"github.com/bibishkin/bi-notes-rest-api/pkg/repository/postgres"
 	service2 "github.com/bibishkin/bi-notes-rest-api/pkg/service"
 	"github.com/joho/godotenv"
@@ -39,7 +40,8 @@ func main() {
 	logger.Infof("database connection successfully made")
 
 	repository := postgres.NewRepository(postgresPool)
-	_ = service2.NewService(repository)
+	service := service2.NewService(repository)
+	_ = handler2.NewHandler(service)
 }
 
 func initConfig() error {
