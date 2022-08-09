@@ -2,13 +2,13 @@ package main
 
 import (
 	"context"
+	entity "github.com/bibishkin/bi-notes-rest-api"
 	handler2 "github.com/bibishkin/bi-notes-rest-api/pkg/handler"
 	"github.com/bibishkin/bi-notes-rest-api/pkg/repository/postgres"
 	service2 "github.com/bibishkin/bi-notes-rest-api/pkg/service"
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
-	"net/http"
 	"os"
 )
 
@@ -44,7 +44,8 @@ func main() {
 	service := service2.NewService(repository)
 	handler := handler2.NewHandler(service)
 
-	if err := http.ListenAndServe(":"+viper.GetString("port"), handler.GetRouter()); err != nil {
+	server := new(entity.Server)
+	if err := server.Run(viper.GetString("port"), handler.GetRouter()); err != nil {
 		logger.Fatalf("error running server: %s", err.Error())
 	}
 
