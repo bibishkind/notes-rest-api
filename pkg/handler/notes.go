@@ -6,7 +6,7 @@ func (h *Handler) createNote(c *gin.Context) {
 
 }
 
-func (h *Handler) getAllNotes(c *gin.Context) {
+func (h *Handler) getNotes(c *gin.Context) {
 
 }
 

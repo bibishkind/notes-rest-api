@@ -6,7 +6,10 @@ import (
 	"github.com/jackc/pgx/v4/pgxpool"
 )
 
-const usersTable = "users"
+const (
+	usersTable = "users"
+	listsTable = "lists"
+)
 
 type Config struct {
 	Username     string

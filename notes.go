@@ -9,6 +9,7 @@ type Note struct {
 
 type List struct {
 	Id          int
-	Title       string
-	Description string
+	UserId      int
+	Title       string `json:"title" binding:"required"`
+	Description string `json:"description"`
 }
