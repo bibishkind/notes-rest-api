@@ -6,7 +6,7 @@ func (s *Service) CreateList(userId int, list entity.List) (int, error) {
 	return s.repository.CreateList(userId, list)
 }
 
-func (s *Service) GetLists(userId int, limit int, offset int) ([]entity.List, error) {
+func (s *Service) GetLists(userId, limit, offset int) ([]entity.List, error) {
 	return s.repository.GetLists(userId, limit, offset)
 }
 

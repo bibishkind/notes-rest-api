@@ -3,8 +3,8 @@ package bi_notes_rest_api
 type Note struct {
 	Id      int
 	ListId  int
-	Title   string
-	Content string
+	Title   string `json:"title" binding:"required"`
+	Content string `json:"content"`
 }
 
 type List struct {

@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"errors"
 	entity "github.com/bibishkin/bi-notes-rest-api"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -30,38 +29,15 @@ func (h *Handler) createList(c *gin.Context) {
 }
 
 func (h *Handler) getLists(c *gin.Context) {
-	limit := c.Query("limit")
-	offset := c.Query("offset")
-
-	var limitInt int
-
-	if limit == "" {
-		limitInt = -1
-	} else {
-		var err error
-		limitInt, err = strconv.Atoi(limit)
-		if err != nil {
-			errorResponse(c, http.StatusBadRequest, errors.New("bad query"))
-			return
-		}
-	}
-
-	var offsetInt int
-
-	if offset == "" {
-		offsetInt = 0
-	} else {
-		var err error
-		offsetInt, err = strconv.Atoi(offset)
-		if err != nil {
-			errorResponse(c, http.StatusBadRequest, errors.New("bad query"))
-			return
-		}
+	limit, offset, err := parseLimitAndOffset(c.Query("limit"), c.Query("offset"))
+	if err != nil {
+		errorResponse(c, http.StatusBadRequest, err)
+		return
 	}
 
 	userId := c.GetInt("userId")
 
-	lists, err := h.service.GetLists(userId, limitInt, offsetInt)
+	lists, err := h.service.GetLists(userId, limit, offset)
 	if err != nil {
 		errorResponse(c, http.StatusInternalServerError, err)
 		return
@@ -76,6 +52,7 @@ func (h *Handler) getListById(c *gin.Context) {
 	listId, err := strconv.Atoi(c.Param("list_id"))
 	if err != nil {
 		errorResponse(c, http.StatusBadRequest, err)
+		return
 	}
 
 	userId := c.GetInt("userId")
@@ -95,6 +72,7 @@ func (h *Handler) updateList(c *gin.Context) {
 	listId, err := strconv.Atoi(c.Param("list_id"))
 	if err != nil {
 		errorResponse(c, http.StatusBadRequest, err)
+		return
 	}
 
 	var list entity.List
@@ -119,6 +97,7 @@ func (h *Handler) deleteList(c *gin.Context) {
 	listId, err := strconv.Atoi(c.Param("list_id"))
 	if err != nil {
 		errorResponse(c, http.StatusBadRequest, err)
+		return
 	}
 
 	userId := c.GetInt("userId")
