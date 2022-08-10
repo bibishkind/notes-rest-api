@@ -23,18 +23,17 @@ func (s *Service) CreateUser(username, password string) (int, error) {
 }
 
 func (s *Service) GenerateJWT(username, password string) (string, error) {
-
 	user, err := s.repository.GetUser(username, getHashedPassword(password))
 	if err != nil {
 		return "", err
 	}
 
-	jwt, err := generateJWT(user.Id)
+	token, err := generateJWT(user.Id)
 	if err != nil {
 		return "", err
 	}
 
-	return jwt, nil
+	return token, nil
 }
 
 func (s *Service) ParseJWT(tokenString string) (int, error) {

@@ -21,7 +21,6 @@ func (r *Repository) CreateUser(username, password string) (int, error) {
 
 func (r *Repository) GetUser(username, password string) (*entity.User, error) {
 	getUserQuery := fmt.Sprintf("SELECT * FROM %s WHERE username=$1 AND password=$2", usersTable)
-	fmt.Println(username, password)
 	row := r.pool.QueryRow(context.Background(), getUserQuery, username, password)
 
 	var user entity.User
