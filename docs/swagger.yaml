@@ -1,0 +1,430 @@
+basePath: /
+definitions:
+  bi_notes_rest_api.List:
+    properties:
+      description:
+        type: string
+      id:
+        type: integer
+      title:
+        type: string
+      userId:
+        type: integer
+    required:
+    - title
+    type: object
+  bi_notes_rest_api.Note:
+    properties:
+      content:
+        type: string
+      id:
+        type: integer
+      listId:
+        type: integer
+      title:
+        type: string
+    required:
+    - title
+    type: object
+  bi_notes_rest_api.User:
+    properties:
+      id:
+        type: integer
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  handler.errorMessage:
+    properties:
+      error:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is an API with auth and CRUD operations on notes.
+  title: Notes REST API
+  version: "1.0"
+paths:
+  /api/lists:
+    get:
+      consumes:
+      - application/json
+      description: gets lists
+      parameters:
+      - description: sets the limit
+        in: query
+        name: limit
+        type: string
+      - description: sets the offset
+        in: query
+        name: offset
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bi_notes_rest_api.List'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+      security:
+      - ApiKeyAuth: []
+      summary: Getting lists
+      tags:
+      - lists
+    post:
+      consumes:
+      - application/json
+      description: creates a list
+      parameters:
+      - description: list
+        in: body
+        name: list
+        required: true
+        schema:
+          $ref: '#/definitions/bi_notes_rest_api.List'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            type: integer
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+      security:
+      - ApiKeyAuth: []
+      summary: Creation of a list
+      tags:
+      - lists
+  /api/lists/{list_id}:
+    delete:
+      consumes:
+      - application/json
+      description: deletes a list
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+      security:
+      - ApiKeyAuth: []
+      summary: Deletion of a list
+      tags:
+      - lists
+    get:
+      consumes:
+      - application/json
+      description: gets list by id
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/bi_notes_rest_api.List'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+      security:
+      - ApiKeyAuth: []
+      summary: Getting list by id
+      tags:
+      - lists
+    put:
+      consumes:
+      - application/json
+      description: updates a list
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+      security:
+      - ApiKeyAuth: []
+      summary: Updating list
+      tags:
+      - lists
+  /api/lists/{list_id}/notes:
+    get:
+      consumes:
+      - application/json
+      description: gets notes
+      parameters:
+      - description: sets the limit
+        in: query
+        name: limit
+        type: string
+      - description: sets the offset
+        in: query
+        name: offset
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/bi_notes_rest_api.Note'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+      security:
+      - ApiKeyAuth: []
+      summary: Getting notes
+      tags:
+      - notes
+    post:
+      consumes:
+      - application/json
+      description: creates a note
+      parameters:
+      - description: note
+        in: body
+        name: note
+        required: true
+        schema:
+          $ref: '#/definitions/bi_notes_rest_api.Note'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            type: integer
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+      security:
+      - ApiKeyAuth: []
+      summary: Creation of a note
+      tags:
+      - notes
+  /api/lists/{list_id}/notes/{note_id}:
+    delete:
+      consumes:
+      - application/json
+      description: deletes a note
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+      security:
+      - ApiKeyAuth: []
+      summary: Deletion of a note
+      tags:
+      - notes
+    get:
+      consumes:
+      - application/json
+      description: gets note by id
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/bi_notes_rest_api.Note'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+      security:
+      - ApiKeyAuth: []
+      summary: Getting note by id
+      tags:
+      - notes
+    put:
+      consumes:
+      - application/json
+      description: updates a note
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+      security:
+      - ApiKeyAuth: []
+      summary: Updating note
+      tags:
+      - notes
+  /auth/sign-in:
+    post:
+      consumes:
+      - application/json
+      description: authenticates user
+      parameters:
+      - description: user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/bi_notes_rest_api.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+      summary: Authentication of a user
+      tags:
+      - auth
+  /auth/sign-up:
+    post:
+      consumes:
+      - application/json
+      description: authorizes user
+      parameters:
+      - description: user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/bi_notes_rest_api.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorMessage'
+      summary: Authorization of a user
+      tags:
+      - auth
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

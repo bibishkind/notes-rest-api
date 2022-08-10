@@ -12,6 +12,17 @@ import (
 	"os"
 )
 
+// @title Notes REST API
+// @version 1.0
+// @description This is an API with auth and CRUD operations on notes.
+
+// @host localhost:8080
+// @BasePath /
+
+// @securityDefinitions.apiKey ApiKeyAuth
+// @in header
+// @name Authorization
+
 func main() {
 	logger := getLogger()
 

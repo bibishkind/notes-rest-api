@@ -7,6 +7,18 @@ import (
 	"strconv"
 )
 
+// @Summary Creation of a note
+// @Security ApiKeyAuth
+// @Tags notes
+// @Description creates a note
+// @Accept json
+// @Produce json
+// @Param note body entity.Note true "note"
+// @Success 201 {integer} int
+// @Failure 400 {object} errorMessage
+// @Failure 401 {object} errorMessage
+// @Failure 500 {object} errorMessage
+// @Router /api/lists/{list_id}/notes [post]
 func (h *Handler) createNote(c *gin.Context) {
 
 	listId, err := strconv.Atoi(c.Param("list_id"))
@@ -34,6 +46,19 @@ func (h *Handler) createNote(c *gin.Context) {
 	})
 }
 
+// @Summary Getting notes
+// @Security ApiKeyAuth
+// @Tags notes
+// @Description gets notes
+// @Accept json
+// @Produce json
+// @Param limit query string int "sets the limit"
+// @Param offset query string int "sets the offset"
+// @Success 200 {object} []entity.Note
+// @Failure 400 {object} errorMessage
+// @Failure 401 {object} errorMessage
+// @Failure 500 {object} errorMessage
+// @Router /api/lists/{list_id}/notes [get]
 func (h *Handler) getNotes(c *gin.Context) {
 	listId, err := strconv.Atoi(c.Param("list_id"))
 	if err != nil {
@@ -59,6 +84,17 @@ func (h *Handler) getNotes(c *gin.Context) {
 	})
 }
 
+// @Summary Getting note by id
+// @Security ApiKeyAuth
+// @Tags notes
+// @Description gets note by id
+// @Accept json
+// @Produce json
+// @Success 200 {object} entity.Note
+// @Failure 400 {object} errorMessage
+// @Failure 401 {object} errorMessage
+// @Failure 500 {object} errorMessage
+// @Router /api/lists/{list_id}/notes/{note_id} [get]
 func (h *Handler) getNoteById(c *gin.Context) {
 	listId, err := strconv.Atoi(c.Param("list_id"))
 	if err != nil {
@@ -85,6 +121,17 @@ func (h *Handler) getNoteById(c *gin.Context) {
 	})
 }
 
+// @Summary Updating note
+// @Security ApiKeyAuth
+// @Tags notes
+// @Description updates a note
+// @Accept json
+// @Produce json
+// @Success 204
+// @Failure 400 {object} errorMessage
+// @Failure 401 {object} errorMessage
+// @Failure 500 {object} errorMessage
+// @Router /api/lists/{list_id}/notes/{note_id} [put]
 func (h *Handler) updateNote(c *gin.Context) {
 	listId, err := strconv.Atoi(c.Param("list_id"))
 	if err != nil {
@@ -116,6 +163,17 @@ func (h *Handler) updateNote(c *gin.Context) {
 	c.Status(http.StatusNoContent)
 }
 
+// @Summary Deletion of a note
+// @Security ApiKeyAuth
+// @Tags notes
+// @Description deletes a note
+// @Accept json
+// @Produce json
+// @Success 204
+// @Failure 400 {object} errorMessage
+// @Failure 401 {object} errorMessage
+// @Failure 500 {object} errorMessage
+// @Router /api/lists/{list_id}/notes/{note_id} [delete]
 func (h *Handler) deleteNote(c *gin.Context) {
 	listId, err := strconv.Atoi(c.Param("list_id"))
 	if err != nil {

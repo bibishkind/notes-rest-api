@@ -1,6 +1,11 @@
 package handler
 
-import "github.com/gin-gonic/gin"
+import (
+	_ "github.com/bibishkin/bi-notes-rest-api/docs"
+	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+)
 
 func (h *Handler) GetRouter() *gin.Engine {
 	gin.SetMode(gin.ReleaseMode)
@@ -32,6 +37,8 @@ func (h *Handler) GetRouter() *gin.Engine {
 			notes.DELETE("/:note_id", h.deleteNote)
 		}
 	}
+
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	return router
 }

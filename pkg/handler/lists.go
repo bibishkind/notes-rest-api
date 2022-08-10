@@ -7,6 +7,18 @@ import (
 	"strconv"
 )
 
+// @Summary Creation of a list
+// @Security ApiKeyAuth
+// @Tags lists
+// @Description creates a list
+// @Accept json
+// @Produce json
+// @Param list body entity.List true "list"
+// @Success 201 {integer} int
+// @Failure 400 {object} errorMessage
+// @Failure 401 {object} errorMessage
+// @Failure 500 {object} errorMessage
+// @Router /api/lists [post]
 func (h *Handler) createList(c *gin.Context) {
 	var list entity.List
 
@@ -28,6 +40,19 @@ func (h *Handler) createList(c *gin.Context) {
 	})
 }
 
+// @Summary Getting lists
+// @Security ApiKeyAuth
+// @Tags lists
+// @Description gets lists
+// @Accept json
+// @Produce json
+// @Param limit query string int "sets the limit"
+// @Param offset query string int "sets the offset"
+// @Success 200 {object} []entity.List
+// @Failure 400 {object} errorMessage
+// @Failure 401 {object} errorMessage
+// @Failure 500 {object} errorMessage
+// @Router /api/lists [get]
 func (h *Handler) getLists(c *gin.Context) {
 	limit, offset, err := parseLimitAndOffset(c.Query("limit"), c.Query("offset"))
 	if err != nil {
@@ -48,6 +73,17 @@ func (h *Handler) getLists(c *gin.Context) {
 	})
 }
 
+// @Summary Getting list by id
+// @Security ApiKeyAuth
+// @Tags lists
+// @Description gets list by id
+// @Accept json
+// @Produce json
+// @Success 200 {object} entity.List
+// @Failure 400 {object} errorMessage
+// @Failure 401 {object} errorMessage
+// @Failure 500 {object} errorMessage
+// @Router /api/lists/{list_id} [get]
 func (h *Handler) getListById(c *gin.Context) {
 	listId, err := strconv.Atoi(c.Param("list_id"))
 	if err != nil {
@@ -68,6 +104,17 @@ func (h *Handler) getListById(c *gin.Context) {
 	})
 }
 
+// @Summary Updating list
+// @Security ApiKeyAuth
+// @Tags lists
+// @Description updates a list
+// @Accept json
+// @Produce json
+// @Success 204
+// @Failure 400 {object} errorMessage
+// @Failure 401 {object} errorMessage
+// @Failure 500 {object} errorMessage
+// @Router /api/lists/{list_id} [put]
 func (h *Handler) updateList(c *gin.Context) {
 	listId, err := strconv.Atoi(c.Param("list_id"))
 	if err != nil {
@@ -93,6 +140,17 @@ func (h *Handler) updateList(c *gin.Context) {
 	c.Status(http.StatusNoContent)
 }
 
+// @Summary Deletion of a list
+// @Security ApiKeyAuth
+// @Tags lists
+// @Description deletes a list
+// @Accept json
+// @Produce json
+// @Success 204
+// @Failure 400 {object} errorMessage
+// @Failure 401 {object} errorMessage
+// @Failure 500 {object} errorMessage
+// @Router /api/lists/{list_id} [delete]
 func (h *Handler) deleteList(c *gin.Context) {
 	listId, err := strconv.Atoi(c.Param("list_id"))
 	if err != nil {
