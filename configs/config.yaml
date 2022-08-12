@@ -2,6 +2,6 @@ port: "8080"
 
 db:
   username: "postgres"
-  host: "host.docker.internal"
-  port: "5000"
+  host: "db"
+  port: "5432"
   name: "notes"

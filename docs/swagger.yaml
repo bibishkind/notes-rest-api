@@ -43,7 +43,6 @@ definitions:
       error:
         type: string
     type: object
-host: localhost:8080
 info:
   contact: {}
   description: This is an API with auth and CRUD operations on notes.

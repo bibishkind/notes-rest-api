@@ -16,7 +16,6 @@ import (
 // @version 1.0
 // @description This is an API with auth and CRUD operations on notes.
 
-// @host localhost:8080
 // @BasePath /
 
 // @securityDefinitions.apiKey ApiKeyAuth

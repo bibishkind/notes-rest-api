@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  api:
+    build: .
+    command: bash -c "while !</dev/tcp/db/5432; do sleep 1; done; migrate -path ./migrations/postgres/schemas -database postgres://postgres:${DB_PASSWORD}@db:5432/notes?sslmode=disable up && ./notes"
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    container_name: "api"
+
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: "notes"
+    volumes:
+      - notes:/var/lib/postgresql/data
+    container_name: "db"
+
+volumes:
+  notes:
