@@ -1,4 +1,4 @@
-package bi_notes_rest_api
+package notes_rest_api
 
 type Note struct {
 	Id      int    `json:"id"`

@@ -1,6 +1,6 @@
 package service
 
-import "github.com/bibishkin/bi-notes-rest-api/pkg/repository"
+import "github.com/bibishkin/notes-rest-api/pkg/repository"
 
 type Service struct {
 	repository repository.Repository

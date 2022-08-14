@@ -1,6 +1,6 @@
 package handler
 
-import service2 "github.com/bibishkin/bi-notes-rest-api/pkg/service"
+import service2 "github.com/bibishkin/notes-rest-api/pkg/service"
 
 type Handler struct {
 	service *service2.Service

@@ -3,7 +3,7 @@ package postgres
 import (
 	"context"
 	"fmt"
-	entity "github.com/bibishkin/bi-notes-rest-api"
+	entity "github.com/bibishkin/notes-rest-api"
 )
 
 func (r *Repository) CreateList(userId int, list entity.List) (int, error) {

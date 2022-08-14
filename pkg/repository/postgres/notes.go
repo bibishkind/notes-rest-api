@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	entity "github.com/bibishkin/bi-notes-rest-api"
+	entity "github.com/bibishkin/notes-rest-api"
 )
 
 func (r *Repository) CreateNote(userId, listId int, note entity.Note) (int, error) {

@@ -1,6 +1,6 @@
 package repository
 
-import entity "github.com/bibishkin/bi-notes-rest-api"
+import entity "github.com/bibishkin/notes-rest-api"
 
 type Repository interface {
 	CreateUser(username, password string) (int, error)
