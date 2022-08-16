@@ -1,12 +1,12 @@
 package handler
 
-import service2 "github.com/bibishkin/notes-rest-api/pkg/service"
+import "github.com/bibishkin/notes-rest-api/pkg/service"
 
 type Handler struct {
-	service *service2.Service
+	service service.Implementation
 }
 
-func NewHandler(service *service2.Service) *Handler {
+func NewHandler(service service.Implementation) *Handler {
 	return &Handler{
 		service: service,
 	}
