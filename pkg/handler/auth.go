@@ -1,7 +1,7 @@
 package handler
 
 import (
-	entity "github.com/bibishkin/notes-rest-api"
+	entity "github.com/bibishkind/notes-rest-api"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

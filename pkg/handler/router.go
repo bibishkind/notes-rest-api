@@ -1,7 +1,7 @@
 package handler
 
 import (
-	_ "github.com/bibishkin/notes-rest-api/docs"
+	_ "github.com/bibishkind/notes-rest-api/docs"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"

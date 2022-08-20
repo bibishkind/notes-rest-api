@@ -1,6 +1,6 @@
 package mocks
 
-import entity "github.com/bibishkin/notes-rest-api"
+import entity "github.com/bibishkind/notes-rest-api"
 
 func (m *MockedService) CreateList(userId int, list entity.List) (int, error) {
 	args := m.Called(userId, list)
