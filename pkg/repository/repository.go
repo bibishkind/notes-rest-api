@@ -1,6 +1,6 @@
 package repository
 
-import entity "github.com/bibishkin/notes-rest-api"
+import entity "github.com/bibishkind/notes-rest-api"
 
 type AuthImplementation interface {
 	CreateUser(username, password string) (int, error)

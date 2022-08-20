@@ -2,10 +2,10 @@ package main
 
 import (
 	"context"
-	entity "github.com/bibishkin/notes-rest-api"
-	handler2 "github.com/bibishkin/notes-rest-api/pkg/handler"
-	"github.com/bibishkin/notes-rest-api/pkg/repository/postgres"
-	service2 "github.com/bibishkin/notes-rest-api/pkg/service"
+	entity "github.com/bibishkind/notes-rest-api"
+	handler2 "github.com/bibishkind/notes-rest-api/pkg/handler"
+	"github.com/bibishkind/notes-rest-api/pkg/repository/postgres"
+	service2 "github.com/bibishkind/notes-rest-api/pkg/service"
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"

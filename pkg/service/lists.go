@@ -1,6 +1,6 @@
 package service
 
-import entity "github.com/bibishkin/notes-rest-api"
+import entity "github.com/bibishkind/notes-rest-api"
 
 func (s *Service) CreateList(userId int, list entity.List) (int, error) {
 	return s.repository.CreateList(userId, list)

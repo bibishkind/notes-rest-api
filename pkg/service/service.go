@@ -1,8 +1,8 @@
 package service
 
 import (
-	entity "github.com/bibishkin/notes-rest-api"
-	"github.com/bibishkin/notes-rest-api/pkg/repository"
+	entity "github.com/bibishkind/notes-rest-api"
+	"github.com/bibishkind/notes-rest-api/pkg/repository"
 )
 
 type Service struct {

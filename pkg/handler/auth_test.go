@@ -3,7 +3,7 @@ package handler
 import (
 	"bytes"
 	"errors"
-	"github.com/bibishkin/notes-rest-api/pkg/service/mocks"
+	"github.com/bibishkind/notes-rest-api/pkg/service/mocks"
 	"github.com/gin-gonic/gin"
 	"github.com/magiconair/properties/assert"
 	"net/http/httptest"

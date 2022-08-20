@@ -1,4 +1,4 @@
-module github.com/bibishkin/notes-rest-api
+module github.com/bibishkind/notes-rest-api
 
 go 1.18
 

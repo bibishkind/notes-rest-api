@@ -1,6 +1,6 @@
 package handler
 
-import "github.com/bibishkin/notes-rest-api/pkg/service"
+import "github.com/bibishkind/notes-rest-api/pkg/service"
 
 type Handler struct {
 	service service.Implementation
