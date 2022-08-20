@@ -2,6 +2,6 @@ port: "8080"
 
 db:
   username: "postgres"
-  host: "db"
+  host: "localhost"
   port: "5432"
   name: "notes"

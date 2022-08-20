@@ -9,7 +9,10 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+	"log"
+	"net/http"
 	"os"
+	"os/signal"
 )
 
 // @title Notes REST API
@@ -55,10 +58,20 @@ func main() {
 	handler := handler2.NewHandler(service)
 
 	server := new(entity.Server)
-	if err := server.Run(viper.GetString("port"), handler.GetRouter()); err != nil {
-		logger.Fatalf("error running server: %s", err.Error())
-	}
 
+	go func() {
+		sigint := make(chan os.Signal, 1)
+		signal.Notify(sigint, os.Interrupt)
+		<-sigint
+
+		if err := server.Shutdown(context.Background()); err != nil {
+			logrus.Infof("server shutdown error: %s", err.Error())
+		}
+	}()
+
+	if err := server.Run(viper.GetString("port"), handler.GetRouter()); err != http.ErrServerClosed {
+		log.Fatalf("server running error: %s", err.Error())
+	}
 }
 
 func initConfig() error {
